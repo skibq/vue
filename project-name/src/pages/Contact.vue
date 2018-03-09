@@ -1,12 +1,10 @@
 <template>
-  <div class="hello">
     <main-layout>
       <h1>Skontaktuj się z nami!</h1>
       <h2>tel.: {{tel}}</h2>
       <h3>{{email}}</h3>
       <router-link to="/">Strona główna</router-link>
     </main-layout>
-  </div>
 </template>
 
 <script>

@@ -5,34 +5,29 @@
         <img src="" class="header-logo" alt="LOGO Placeholder">
       </router-link>
     </div>
-      <div class="menu">
+      <nav class="menu">
         <router-link class="menu-item" v-for="item in menu" :to="item.url" :key="item.title">
           {{item.title}}
-        </router-link> 
-      </div>
+        </router-link>
+      </nav>
   </div>
 </template>
  
 
 <script>
-  import axios from 'axios'
-  import Config from '../config'
   export default {
-    data () {
-      return {
-        menu: this.getMenu()
+    methods: {
+      refreshMenu () {
+        this.$store.dispatch('refreshMenu').then()
       }
     },
-    methods: {
-      getMenu: function () {
-        axios.get(`${Config.ajax_url}custom-routes/menu/`)
-        .then(response => {
-          this.menu = response.data
-        })
-        .catch(response => {
-          console.log('ajax call error header.vue')
-        })
+    computed: {
+      menu () {
+        return this.$store.state.menu
       }
+    },
+    created () {
+      this.refreshMenu()
     }
   }
 </script>

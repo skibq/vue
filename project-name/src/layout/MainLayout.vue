@@ -25,7 +25,8 @@
 </script>
 
 
-<style>
+<style lang="scss">
+  @import 'node_modules/bootstrap/scss/bootstrap';  
   * {
     box-sizing: border-box;
   }
@@ -39,7 +40,7 @@
     text-align: center;
   }
   a {
-    color: #2e7aff /*#005dff*/;
+    color: #2e7aff;
     text-decoration: none;
     transition: color ease-in-out 0.5s;
   }

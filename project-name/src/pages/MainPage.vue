@@ -1,50 +1,44 @@
 <template>
     <main-layout>
-      <h1>{{blog_title}}</h1>
-      <h2>{{blog_description}}</h2>
-      <h3>{{title}}</h3>
+      <h1 class="h1 h1--main-page">{{globalInfo.name}}</h1>
+      <h2 class="h2">{{globalInfo.description}}</h2>
+      <listing class="container"></listing>
     </main-layout>
 </template>
 
 <script>
-  import MainLayout from '../layout/MainLayout'
-  import axios from 'axios'
-  import Config from '../config'
   
-    
+  import MainLayout from '../layout/MainLayout'
+  import Listing from '../components/listing'
+  
   export default {
-    data () {
-      return {
-        blog_title: (this.blog_title === undefined ? 'placeholder' : this.blog_title),
-        blog_description: ''
-      }
-    },
     components: {
-      MainLayout
+      MainLayout,
+      Listing
     },
-    mounted () {
-      axios.get(Config.ajax_url)
-        .then(response => {
-          this.blog_title = response.data.name
-          this.blog_description = response.data.description
-        })
-        .catch(response => {
-          console.log('ajax call error')
-        })
+    methods: {
+      refreshGlobalInfo () {
+        console.log('refreshinh global data')
+        this.$store.dispatch('refreshGlobalInfo')
+      }
     },
     computed: {
-      title () {
-        return store.state.title
+      globalInfo () {
+        return this.$store.state.globalInfo
       }
-      
+    },
+    created () {
+      this.refreshGlobalInfo()
     }
   }
 </script>
 
 <style scoped>
-  h1,
-  h2 {
-    font-weight: normal;
+  .h1 {
+    padding-top: 100px;
+    text-align: center;
+  }
+  .h2 {
     text-align: center;
   }
   
